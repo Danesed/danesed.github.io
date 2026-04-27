@@ -1,8 +1,8 @@
 {
-  "name": "astrofy",
-  "description": "Astrofy is a free and open-source template for your Personal Portfolio Website built with Astro and TailwindCSS. Create in minutes a website with Blog, CV, Project Section, Store and RSS Feed.",
+  "name": "danesed-github-io",
+  "description": "Source for danesed.github.io — Danilo Danese's academic portfolio.",
   "type": "module",
-  "version": "2.5.1",
+  "version": "1.0.0",
   "private": true,
   "scripts": {
     "dev": "astro dev",
@@ -11,18 +11,19 @@
     "preview": "astro preview",
     "astro": "astro"
   },
-  "packageManager": "pnpm@8.6.12",
+  "packageManager": "pnpm@9.15.0",
   "dependencies": {
-    "@astrojs/mdx": "^1.0.3",
-    "@astrojs/rss": "^3.0.0",
-    "@astrojs/sitemap": "^3.0.0",
-    "@astrojs/tailwind": "^5.0.0",
-    "astro": "^3.2.3",
-    "daisyui": "^3.2.1",
-    "dayjs": "^1.11.9",
-    "sharp": "^0.32.5"
+    "@astrojs/mdx": "^4.3.6",
+    "@astrojs/rss": "^4.0.18",
+    "@astrojs/sitemap": "^3.7.2",
+    "@astrojs/tailwind": "^6.0.2",
+    "astro": "^5.14.4",
+    "daisyui": "^4.12.14",
+    "dayjs": "^1.11.13",
+    "sharp": "^0.33.5"
   },
   "devDependencies": {
-    "@tailwindcss/typography": "^0.5.10"
+    "@tailwindcss/typography": "^0.5.15",
+    "tailwindcss": "^3.4.17"
   }
 }
