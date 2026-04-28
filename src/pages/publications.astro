@@ -1,71 +1,61 @@
 ---
 import BaseLayout from "../layouts/BaseLayout.astro";
-import HorizontalCard from "../components/HorizontalCard.astro";
+import publications from "../data/publications.json";
+
+type Publication = {
+  id: string;
+  title: string;
+  year: number | null;
+  date: string | null;
+  venue: string;
+  authors: string[];
+  link: string;
+  abstract: string | null;
+};
+
+const SELF = "Danilo Danese";
+
+// Group by year, newest first. Years are already sorted by the fetch script.
+const byYear = new Map<number | "Other", Publication[]>();
+for (const pub of publications as Publication[]) {
+  const key = pub.year ?? "Other";
+  if (!byYear.has(key)) byYear.set(key, []);
+  byYear.get(key)!.push(pub);
+}
+const groups = Array.from(byYear.entries());
 ---
 
-<BaseLayout title = "Publications" sideBarActiveItemID="publications">
-  <div>
-    <div class="text-3xl w-full font-bold mb-5">Publications Header</div>
+<BaseLayout title="Publications" sideBarActiveItemID="publications">
+  <div class="mb-5">
+    <div class="text-3xl w-full font-bold">Publications</div>
+    <p class="text-sm opacity-70 mt-1">
+      Auto-synced weekly from <a class="link" href="https://www.semanticscholar.org/author/2290185261" target="_blank" rel="noopener">Semantic Scholar</a>.
+    </p>
   </div>
 
-  <HorizontalCard
-    title="Ducho 2.0: Towards a More Up-to-Date Feature Extraction and Processing Framework for Multimodal Recommendation"
-    img="https://raw.githubusercontent.com/sisinflab/Ducho/main/docs/source/img/ducho_v2_overview.png"
-    desc="Matteo Attimonelli, Danilo Danese, Daniele Malitesta, Claudio Pomo, Giuseppe Gassi, Tommaso Di Noia"
-    url="https://arxiv.org/pdf/2403.04503.pdf"
-    badge="WWW 2024"
-  />
-<!--
-  <div class="divider my-0"></div>
-  <HorizontalCard
-  title="Optimizing Synthetic Data from Scarcity: Towards Meaningful Data Generation in High-Dimensional Low-Sample Size Domains"
-  img=""
-  desc="Danilo Danese"
-  url="#"
-  badge="XAI 2024"
-/>
-  <div class="divider my-0"></div>
-  <HorizontalCard
-  title="Integrating eXplainable AI in Healthcare: A Web Application Framework for Advancing the One Health Paradigm"
-  img="#"
-  desc="Danilo Danese, Tommaso Di Noia, Angela Lombardi, Domenico Lofù, Fatemeh Nazary, Rodolfo Sardone and Paolo Sorino"
-  url="#"
-  badge="WALS 2024"
-/> -->
-  <!-- 
-  <div class="divider my-0"></div>
-  <HorizontalCard
-    title="Demo Project 2"
-    img="/post_img.webp"
-    desc="Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua."
-    url="#"
-    badge="Short"
-  />
--->
-  <div>
-    <div class="text-3xl w-full font-bold mb-5 mt-10">Projects Header</div>
-</div>
-<!-- 
-  <HorizontalCard
-    title="Demo Project 3"
-    img="/post_img.webp"
-    desc="Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua."
-    url="#"
-    badge="FOSS"
-  />
-  <div class="divider my-0"></div>
-  <HorizontalCard
-    title="Demo Project 4"
-    img="/post_img.webp"
-    desc="Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua."
-    url="#"
-  />
-  <div class="divider my-0"></div>
-  <HorizontalCard
-    title="Demo Project 5"
-    img="/post_img.webp"
-    desc="Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua."
-    url="#"
-  />
-  -->
+  {groups.map(([year, items]) => (
+    <section class="mb-8">
+      <h2 class="text-2xl font-semibold mb-3">{year}</h2>
+      <ul class="space-y-3">
+        {items.map((pub) => (
+          <li class="rounded-lg bg-base-100 hover:shadow-xl transition ease-in-out p-4 border border-base-200">
+            <a href={pub.link} target="_blank" rel="noopener" class="block">
+              <h3 class="text-lg font-bold leading-snug">
+                {pub.title}
+                {pub.venue && <span class="badge badge-secondary ml-2 align-middle">{pub.venue}</span>}
+              </h3>
+              <p class="py-1 text-sm">
+                {pub.authors.map((name, i) => (
+                  <>
+                    {i > 0 && ", "}
+                    {name === SELF ? <strong>{name}</strong> : name}
+                  </>
+                ))}
+              </p>
+            </a>
+          </li>
+        ))}
+      </ul>
+    </section>
+  ))}
 </BaseLayout>
