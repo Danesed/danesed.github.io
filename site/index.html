@@ -218,7 +218,7 @@
   @media (max-width: 520px) { .rows li { grid-template-columns: 1fr; } }
 
   /* Other Projects */
-  .projects-grid { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 14px; margin-top: clamp(20px, 3vw, 32px); }
+  .projects-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); gap: 14px; margin-top: clamp(20px, 3vw, 32px); }
   .project-tile { background: var(--surface); border-radius: var(--card); padding: clamp(20px, 2.5vw, 28px); display: flex; flex-direction: column; justify-content: space-between; gap: 18px; min-width: 0; transition: transform .35s var(--ease), box-shadow .35s var(--ease); }
   .project-tile:hover { box-shadow: 0 12px 30px var(--lift); }
   .js .project-tile[data-reveal]:hover { transform: translateY(-3px); }
@@ -228,7 +228,7 @@
   .project-tile p { font-size: .88rem; line-height: 1.48; color: var(--ink-2); margin: 0; }
   .project-links { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 4px; }
   .project-links .pill { min-height: 32px; padding: 0 13px; font-size: .80rem; }
-  @media (max-width: 820px) { .projects-grid { grid-template-columns: 1fr; } }
+  @media (max-width: 600px) { .projects-grid { grid-template-columns: 1fr; } }
 
   /* Contact */
   .contact { position: relative; overflow: hidden; isolation: isolate; border-radius: var(--card); background: var(--navy); color: var(--cream); padding: clamp(32px, 6vw, 84px) clamp(24px, 5vw, 64px); display: grid; gap: 22px; min-height: 360px; align-content: center; }
@@ -407,6 +407,19 @@
     <div class="projects-grid">
       <article class="project-tile" data-reveal>
         <div class="project-top">
+          <span class="project-tag">macOS App · AI</span>
+          <h3>WaveDiT Studio</h3>
+          <p>Native macOS app for age-conditioned 3D brain MRI synthesis running locally on Apple Silicon MPS.</p>
+        </div>
+        <div class="project-links">
+          <a class="pill small" href="https://huggingface.co/spaces/danesed/WaveDiT-demo" target="_blank" rel="noopener">HF Demo</a>
+          <a class="pill small" href="https://danesed.github.io/wavedit-page/" target="_blank" rel="noopener">Project page</a>
+          <a class="pill small" href="https://github.com/sisinflab/WaveDiT/tree/macos-app" target="_blank" rel="noopener">GitHub</a>
+        </div>
+      </article>
+
+      <article class="project-tile" data-reveal style="--i:1">
+        <div class="project-top">
           <span class="project-tag">macOS App</span>
           <h3>μStats</h3>
           <p>A lightweight, pixel-snapped system statistics monitor for the Mac menu bar.</p>
@@ -417,7 +430,7 @@
         </div>
       </article>
 
-      <article class="project-tile" data-reveal style="--i:1">
+      <article class="project-tile" data-reveal style="--i:2">
         <div class="project-top">
           <span class="project-tag">VS Code Extension</span>
           <h3>AgentMux</h3>
@@ -429,7 +442,7 @@
         </div>
       </article>
 
-      <article class="project-tile" data-reveal style="--i:2">
+      <article class="project-tile" data-reveal style="--i:3">
         <div class="project-top">
           <span class="project-tag">VS Code Themes</span>
           <h3>Color Sea</h3>

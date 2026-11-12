@@ -12,7 +12,9 @@
     },
     "conf/miccai/DaneseLFAN26": {
       "Code": "https://github.com/Danesed/WaveDiT",
-      "Project page": "https://danesed.github.io/wavedit-page/"
+      "Project page": "https://danesed.github.io/wavedit-page/",
+      "Demo": "https://huggingface.co/spaces/danesed/WaveDiT-demo",
+      "macOS App": "https://github.com/sisinflab/WaveDiT/tree/macos-app"
     },
     "conf/miccai/DaneseLN26": {
       "Code": "https://github.com/Danesed/WaveUDiT"
