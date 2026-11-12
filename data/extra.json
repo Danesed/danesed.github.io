@@ -21,6 +21,9 @@
     },
     "journals/corr/abs-2607-27974": {
       "Code": "https://github.com/Danesed/WaveUDiT"
+    },
+    "journals/braininf/LombardiFC26": {
+      "Code": "https://github.com/sisinflab/STABLE-BAG"
     }
   },
   "same": [
@@ -48,6 +51,26 @@
       "published": 2026,
       "doi": "10.48550/ARXIV.2607.27974",
       "url": "https://arxiv.org/abs/2607.27974"
+    },
+    {
+      "key": "journals/braininf/LombardiFC26",
+      "kind": "journal",
+      "title": "STABLE-BAG: a stability-aware framework for SHAP-based brain age gap decomposition",
+      "authors": [
+        "Angela Lombardi",
+        "Giuseppe Fasano",
+        "Mariangela Ciuffreda",
+        "Tommaso Colafiglio",
+        "Danilo Danese",
+        "Francesco Musicco",
+        "Eugenio Di Sciascio",
+        "Tommaso Di Noia"
+      ],
+      "venue": "Brain Informatics",
+      "year": 2026,
+      "published": 2026,
+      "doi": "10.1186/s40708-026-00338-6",
+      "url": "https://doi.org/10.1186/s40708-026-00338-6"
     }
   ]
 }
