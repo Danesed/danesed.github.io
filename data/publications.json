@@ -1,0 +1,424 @@
+{
+ "updated": "2026-11-12",
+ "records": [
+  {
+   "key": "conf/cikm/PomoADNN25",
+   "kind": "conference",
+   "title": "Do Recommender Systems Really Leverage Multimodal Content? A Comprehensive Analysis on Multimodal Representations for Recommendation",
+   "authors": [
+    "Claudio Pomo",
+    "Matteo Attimonelli",
+    "Danilo Danese",
+    "Fedelucio Narducci",
+    "Tommaso Di Noia"
+   ],
+   "venue": "CIKM",
+   "volume": null,
+   "pages": "2377-2387",
+   "year": 2025,
+   "published": 2025,
+   "doi": "10.1145/3746252.3761398",
+   "url": "https://doi.org/10.1145/3746252.3761398"
+  },
+  {
+   "key": "conf/icwe/DaneseNLLNSS24",
+   "kind": "conference",
+   "title": "Integrating eXplainable AI in Healthcare: A Web Application Framework for Advancing the One Health Paradigm",
+   "authors": [
+    "Danilo Danese",
+    "Tommaso Di Noia",
+    "Angela Lombardi",
+    "Domenico Lofù",
+    "Fatemeh Nazary",
+    "Rodolfo Sardone",
+    "Paolo Sorino"
+   ],
+   "venue": "ICWE Workshops",
+   "volume": null,
+   "pages": "77-88",
+   "year": 2024,
+   "published": 2025,
+   "doi": "10.1007/978-3-031-75110-3_7",
+   "url": "https://doi.org/10.1007/978-3-031-75110-3_7"
+  },
+  {
+   "key": "conf/miccai/DaneseLFAN26",
+   "kind": "conference",
+   "title": "WaveDiT: Distribution-Aware Wavelet Flow Matching for Efficient 3D Brain MRI Synthesis",
+   "authors": [
+    "Danilo Danese",
+    "Angela Lombardi",
+    "Giuseppe Fasano",
+    "Matteo Attimonelli",
+    "Tommaso Di Noia"
+   ],
+   "venue": "MICCAI (13)",
+   "volume": null,
+   "pages": "618-628",
+   "year": 2026,
+   "published": 2027,
+   "doi": "10.1007/978-3-032-38189-7_59",
+   "url": "https://doi.org/10.1007/978-3-032-38189-7_59"
+  },
+  {
+   "key": "conf/www/AttimonelliDMPG24",
+   "kind": "conference",
+   "title": "Ducho 2.0: Towards a More Up-to-Date Unified Framework for the Extraction of Multimodal Features in Recommendation",
+   "authors": [
+    "Matteo Attimonelli",
+    "Danilo Danese",
+    "Daniele Malitesta",
+    "Claudio Pomo",
+    "Giuseppe Gassi",
+    "Tommaso Di Noia"
+   ],
+   "venue": "WWW (Companion Volume)",
+   "volume": null,
+   "pages": "1075-1078",
+   "year": 2024,
+   "published": 2024,
+   "doi": "10.1145/3589335.3651440",
+   "url": "https://doi.org/10.1145/3589335.3651440"
+  },
+  {
+   "key": "conf/xai/ColafiglioLSLDN25",
+   "kind": "conference",
+   "title": "Explainable Evaluation of Emotion Recognition with Low-Cost EEG: Feature Engineering and Interpretability Insights",
+   "authors": [
+    "Tommaso Colafiglio",
+    "Angela Lombardi",
+    "Paolo Sorino",
+    "Domenico Lofù",
+    "Danilo Danese",
+    "Fedelucio Narducci",
+    "Eugenio Di Sciascio",
+    "Tommaso Di Noia"
+   ],
+   "venue": "xAI (Late-breaking Work, Demos, Doctoral Consortium)",
+   "volume": null,
+   "pages": "65-72",
+   "year": 2025,
+   "published": 2025,
+   "doi": null,
+   "url": "https://ceur-ws.org/Vol-4017/paper_09.pdf"
+  },
+  {
+   "key": "conf/xai/Danese24",
+   "kind": "conference",
+   "title": "Optimizing Synthetic Data from Scarcity: Towards Meaningful Data Generation in High-Dimensional Low-Sample Size Domains",
+   "authors": [
+    "Danilo Danese"
+   ],
+   "venue": "xAI (Late-breaking Work, Demos, Doctoral Consortium)",
+   "volume": null,
+   "pages": "329-336",
+   "year": 2024,
+   "published": 2024,
+   "doi": null,
+   "url": "https://ceur-ws.org/Vol-3793/paper_42.pdf"
+  },
+  {
+   "key": "conf/xai/DaneseFLSN25",
+   "kind": "conference",
+   "title": "Comparing XAI Explanations and Synthetic Data Augmentation Strategies in Neuroimaging AI",
+   "authors": [
+    "Danilo Danese",
+    "Giuseppe Fasano",
+    "Angela Lombardi",
+    "Eugenio Di Sciascio",
+    "Tommaso Di Noia"
+   ],
+   "venue": "xAI (4)",
+   "volume": null,
+   "pages": "3-26",
+   "year": 2025,
+   "published": 2026,
+   "doi": "10.1007/978-3-032-08330-2_1",
+   "url": "https://doi.org/10.1007/978-3-032-08330-2_1"
+  },
+  {
+   "key": "data/11/ColafiglioLSBLDSNN24",
+   "kind": "data",
+   "title": "NeuroSense: A Novel EEG Dataset Utilizing Low-Cost, Sparse Electrode Devices for Emotion Exploration",
+   "authors": [
+    "Tommaso Colafiglio",
+    "Angela Lombardi",
+    "Paolo Sorino",
+    "Elvira Brattico",
+    "Domenico Lofù",
+    "Danilo Danese",
+    "Eugenio Di Sciascio",
+    "Tommaso Di Noia",
+    "Fedelucio Narducci"
+   ],
+   "venue": "Zenodo",
+   "volume": null,
+   "pages": null,
+   "year": 2024,
+   "published": 2024,
+   "doi": "10.5281/ZENODO.14002375",
+   "url": "https://doi.org/10.5281/ZENODO.14002375"
+  },
+  {
+   "key": "data/11/ColafiglioLSBLDSNN24a",
+   "kind": "data",
+   "title": "NeuroSense: A Novel EEG Dataset Utilizing Low-Cost, Sparse Electrode Devices for Emotion Exploration",
+   "authors": [
+    "Tommaso Colafiglio",
+    "Angela Lombardi",
+    "Paolo Sorino",
+    "Elvira Brattico",
+    "Domenico Lofù",
+    "Danilo Danese",
+    "Eugenio Di Sciascio",
+    "Tommaso Di Noia",
+    "Fedelucio Narducci"
+   ],
+   "venue": "Zenodo",
+   "volume": null,
+   "pages": null,
+   "year": 2024,
+   "published": 2024,
+   "doi": "10.5281/ZENODO.14003181",
+   "url": "https://doi.org/10.5281/ZENODO.14003181"
+  },
+  {
+   "key": "journals/access/ColafiglioLSBLDSNN24",
+   "kind": "journal",
+   "title": "NeuroSense: A Novel EEG Dataset Utilizing Low-Cost, Sparse Electrode Devices for Emotion Exploration",
+   "authors": [
+    "Tommaso Colafiglio",
+    "Angela Lombardi",
+    "Paolo Sorino",
+    "Elvira Brattico",
+    "Domenico Lofù",
+    "Danilo Danese",
+    "Eugenio Di Sciascio",
+    "Tommaso Di Noia",
+    "Fedelucio Narducci"
+   ],
+   "venue": "IEEE Access",
+   "volume": "12",
+   "pages": "159296-159315",
+   "year": 2024,
+   "published": 2024,
+   "doi": "10.1109/ACCESS.2024.3487932",
+   "url": "https://doi.org/10.1109/ACCESS.2024.3487932"
+  },
+  {
+   "key": "journals/corr/abs-2403-04503",
+   "kind": "preprint",
+   "title": "Ducho 2.0: Towards a More Up-to-Date Unified Framework for the Extraction of Multimodal Features in Recommendation",
+   "authors": [
+    "Matteo Attimonelli",
+    "Danilo Danese",
+    "Daniele Malitesta",
+    "Claudio Pomo",
+    "Giuseppe Gassi",
+    "Tommaso Di Noia"
+   ],
+   "venue": "CoRR",
+   "volume": "abs/2403.04503",
+   "pages": null,
+   "year": 2024,
+   "published": 2024,
+   "doi": "10.48550/ARXIV.2403.04503",
+   "url": "https://doi.org/10.48550/ARXIV.2403.04503"
+  },
+  {
+   "key": "journals/corr/abs-2409-15857",
+   "kind": "preprint",
+   "title": "Ducho meets Elliot: Large-scale Benchmarks for Multimodal Recommendation",
+   "authors": [
+    "Matteo Attimonelli",
+    "Danilo Danese",
+    "Angela Di Fazio",
+    "Daniele Malitesta",
+    "Claudio Pomo",
+    "Tommaso Di Noia"
+   ],
+   "venue": "CoRR",
+   "volume": "abs/2409.15857",
+   "pages": null,
+   "year": 2024,
+   "published": 2024,
+   "doi": "10.48550/ARXIV.2409.15857",
+   "url": "https://doi.org/10.48550/ARXIV.2409.15857"
+  },
+  {
+   "key": "journals/corr/abs-2508-04571",
+   "kind": "preprint",
+   "title": "Do Recommender Systems Really Leverage Multimodal Content? A Comprehensive Analysis on Multimodal Representations for Recommendation",
+   "authors": [
+    "Claudio Pomo",
+    "Matteo Attimonelli",
+    "Danilo Danese",
+    "Fedelucio Narducci",
+    "Tommaso Di Noia"
+   ],
+   "venue": "CoRR",
+   "volume": "abs/2508.04571",
+   "pages": null,
+   "year": 2025,
+   "published": 2025,
+   "doi": "10.48550/ARXIV.2508.04571",
+   "url": "https://doi.org/10.48550/ARXIV.2508.04571"
+  },
+  {
+   "key": "journals/corr/abs-2601-05212",
+   "kind": "preprint",
+   "title": "FlowLet: Conditional 3D Brain MRI Synthesis using Wavelet Flow Matching",
+   "authors": [
+    "Danilo Danese",
+    "Angela Lombardi",
+    "Matteo Attimonelli",
+    "Giuseppe Fasano",
+    "Tommaso Di Noia"
+   ],
+   "venue": "CoRR",
+   "volume": "abs/2601.05212",
+   "pages": null,
+   "year": 2026,
+   "published": 2026,
+   "doi": "10.48550/ARXIV.2601.05212",
+   "url": "https://doi.org/10.48550/ARXIV.2601.05212"
+  },
+  {
+   "key": "journals/corr/abs-2606-08670",
+   "kind": "preprint",
+   "title": "WaveDiT: Distribution-Aware Wavelet Flow Matching for Efficient 3D Brain MRI Synthesis",
+   "authors": [
+    "Danilo Danese",
+    "Angela Lombardi",
+    "Giuseppe Fasano",
+    "Matteo Attimonelli",
+    "Tommaso Di Noia"
+   ],
+   "venue": "CoRR",
+   "volume": "abs/2606.08670",
+   "pages": null,
+   "year": 2026,
+   "published": 2026,
+   "doi": "10.48550/ARXIV.2606.08670",
+   "url": "https://doi.org/10.48550/ARXIV.2606.08670"
+  },
+  {
+   "key": "journals/corr/abs-2607-27974",
+   "kind": "preprint",
+   "title": "Now You Have My Healthy Attention: A U-DiT for Brain-MRI Inpainting",
+   "authors": [
+    "Danilo Danese",
+    "Angela Lombardi",
+    "Tommaso Di Noia"
+   ],
+   "venue": "CoRR",
+   "volume": "abs/2607.27974",
+   "pages": null,
+   "year": 2026,
+   "published": 2026,
+   "doi": "10.48550/ARXIV.2607.27974",
+   "url": "https://doi.org/10.48550/ARXIV.2607.27974"
+  },
+  {
+   "key": "journals/corr/abs-2608-11033",
+   "kind": "preprint",
+   "title": "Who Are You Explaining To? A Multi-Agent System for Audience-Aware XAI Narratives",
+   "authors": [
+    "Francesco Musicco",
+    "Danilo Danese",
+    "Giuseppe Fasano",
+    "Angela Lombardi",
+    "Alberto Carlo Maria Mancino",
+    "Tommaso Di Noia"
+   ],
+   "venue": "CoRR",
+   "volume": "abs/2608.11033",
+   "pages": null,
+   "year": 2026,
+   "published": 2026,
+   "doi": "10.48550/ARXIV.2608.11033",
+   "url": "https://doi.org/10.48550/ARXIV.2608.11033"
+  },
+  {
+   "key": "journals/corr/abs-2608-23302",
+   "kind": "preprint",
+   "title": "Grounding Free-Form Instructions for Fashion Complementary Image Generation",
+   "authors": [
+    "Matteo Attimonelli",
+    "Claudio Pomo",
+    "Alessandro De Bellis",
+    "Danilo Danese",
+    "Dietmar Jannach",
+    "Tommaso Di Noia"
+   ],
+   "venue": "CoRR",
+   "volume": "abs/2608.23302",
+   "pages": null,
+   "year": 2026,
+   "published": 2026,
+   "doi": "10.48550/ARXIV.2608.23302",
+   "url": "https://doi.org/10.48550/ARXIV.2608.23302"
+  },
+  {
+   "key": "journals/corr/abs-2609-31696",
+   "kind": "preprint",
+   "title": "Data Processing for Offline Evaluation in Recommender Systems: a Survey",
+   "authors": [
+    "Alberto Carlo Maria Mancino",
+    "Angela Di Fazio",
+    "Danilo Danese",
+    "Matteo Attimonelli",
+    "Daniele Malitesta",
+    "Antonio Ferrara",
+    "Claudio Pomo",
+    "Tommaso Di Noia"
+   ],
+   "venue": "CoRR",
+   "volume": "abs/2609.31696",
+   "pages": null,
+   "year": 2026,
+   "published": 2026,
+   "doi": "10.48550/ARXIV.2609.31696",
+   "url": "https://doi.org/10.48550/ARXIV.2609.31696"
+  },
+  {
+   "key": "journals/eswa/AttimonelliDFMPN26",
+   "kind": "journal",
+   "title": "Large-scale benchmarks for multimodal recommendation with Ducho",
+   "authors": [
+    "Matteo Attimonelli",
+    "Danilo Danese",
+    "Angela Di Fazio",
+    "Daniele Malitesta",
+    "Claudio Pomo",
+    "Tommaso Di Noia"
+   ],
+   "venue": "Expert Syst. Appl.",
+   "volume": "307",
+   "pages": "130813",
+   "year": 2026,
+   "published": 2026,
+   "doi": "10.1016/J.ESWA.2025.130813",
+   "url": "https://doi.org/10.1016/J.ESWA.2025.130813"
+  },
+  {
+   "key": "journals/mia/DaneseLAFN26",
+   "kind": "journal",
+   "title": "FlowLet: Conditional 3D brain MRI synthesis using wavelet flow matching",
+   "authors": [
+    "Danilo Danese",
+    "Angela Lombardi",
+    "Matteo Attimonelli",
+    "Giuseppe Fasano",
+    "Tommaso Di Noia"
+   ],
+   "venue": "Medical Image Anal.",
+   "volume": "113",
+   "pages": "104161",
+   "year": 2026,
+   "published": 2026,
+   "doi": "10.1016/J.MEDIA.2026.104161",
+   "url": "https://doi.org/10.1016/J.MEDIA.2026.104161"
+  }
+ ]
+}

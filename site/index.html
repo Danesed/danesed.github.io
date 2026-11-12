@@ -1,0 +1,707 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Danilo Danese</title>
+<meta name="description" content="Danilo Danese, AI researcher. Generative AI for high-dimensional, low-sample-size domains: flow matching and diffusion for full-resolution 3D brain MRI.">
+<meta name="author" content="Danilo Danese">
+<meta property="og:title" content="Danilo Danese">
+<meta property="og:description" content="Generative AI for high-dimensional, low-sample-size domains: flow matching and diffusion for full-resolution 3D brain MRI.">
+<meta property="og:image" content="https://danesed.github.io/assets/social.jpg">
+<meta property="og:type" content="profile">
+<meta property="og:url" content="https://danesed.github.io/">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="color-scheme" content="light dark">
+<link rel="canonical" href="https://danesed.github.io/">
+<link rel="icon" href="assets/favicon.svg" type="image/svg+xml">
+<script>
+// Before the first paint: the reader's choice, or the system's. The "js" class
+// lets the page hide what it is about to reveal only when a script can reveal it.
+(function () {
+  var theme = null, root = document.documentElement;
+  try { theme = localStorage.getItem("theme"); } catch (e) {}
+  if (theme !== "light" && theme !== "dark") {
+    theme = window.matchMedia && matchMedia("(prefers-color-scheme: dark)").matches ? "dark" : "light";
+  }
+  root.dataset.theme = theme;
+  // "#still" shows the page with nothing left to animate in: for a screenshot.
+  if (location.hash !== "#still") root.classList.add("js");
+})();
+</script>
+<style>
+  /* The page is a thesis cover opened out: its electric blue field, its coral and
+     navy, and Palatino, the face the thesis is set in, on a quiet cream ground. */
+  :root {
+    --blue: #133BFF; --coral: #FF6A4D; --navy: #0A1660; --peri: #9DB0FF; --cream: #FFFCEC;
+    --bg: #FAF8F3; --surface: #FFFFFF; --sand: #F7ECD9;
+    --ink: #191919; --ink-2: rgba(25,25,25,.72); --ink-3: rgba(25,25,25,.52);
+    --line: rgba(25,25,25,.09); --line-2: #B7B4AF; --tint: rgba(25,25,25,.06);
+    --link: #133BFF; --mark: #133BFF; --lift: rgba(40,30,10,.10);
+    --serif: "Palatino Linotype", Palatino, "Book Antiqua", "TeX Gyre Pagella", "Iowan Old Style", Georgia, serif;
+    --sans: "Segoe Sans", -apple-system, BlinkMacSystemFont, "Helvetica Neue", Arial, sans-serif;
+    --mono: ui-monospace, "SF Mono", Menlo, Consolas, monospace;
+    --wrap: 1120px; --card: 28px;
+    --ease: cubic-bezier(.2, .7, .2, 1);
+    /* The wave rule of the thesis cover: period 8, amplitude 1.3. */
+    --wave: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='8' height='6' viewBox='0 0 8 6'%3E%3Cpath d='M0 3 Q2 .2 4 3 T8 3' fill='none' stroke='black' stroke-width='.9' stroke-linecap='round'/%3E%3C/svg%3E");
+    color-scheme: light;
+  }
+  :root[data-theme="dark"] {
+    --bg: #0D0F1F; --surface: #171A31; --sand: #1D2140;
+    --ink: #F4F1E8; --ink-2: rgba(244,241,232,.74); --ink-3: rgba(244,241,232,.52);
+    --line: rgba(244,241,232,.11); --line-2: #4A4F6E; --tint: rgba(244,241,232,.08);
+    --link: #9DB0FF; --mark: #9DB0FF; --lift: rgba(0,0,0,.45);
+    color-scheme: dark;
+  }
+  * { box-sizing: border-box; }
+  html { scroll-behavior: smooth; scroll-padding-top: 76px; -webkit-text-size-adjust: 100%; }
+  body { margin: 0; background: var(--bg); color: var(--ink); font: 16px/1.55 var(--sans); -webkit-font-smoothing: antialiased; transition: background-color .3s ease, color .3s ease; }
+  img { max-width: 100%; display: block; }
+  a { color: inherit; }
+  p, ol, ul { margin: 0; padding: 0; }
+  ol, ul { list-style: none; }
+  .wrap { max-width: var(--wrap); margin: 0 auto; padding-left: max(18px, env(safe-area-inset-left)); padding-right: max(18px, env(safe-area-inset-right)); }
+  h1, h2, h3, h4 { font-family: var(--serif); font-weight: 400; margin: 0; text-wrap: balance; }
+  h1 { font-size: clamp(3rem, 9vw, 6.4rem); line-height: .96; letter-spacing: -0.03em; }
+  h2 { font-size: clamp(2rem, 4.6vw, 3.5rem); line-height: 1.04; letter-spacing: -0.02em; }
+  .label { font-size: .875rem; line-height: 1.3; color: var(--ink-2); }
+  section.block { padding-block: clamp(44px, 7vw, 96px); }
+  :focus-visible { outline: 2px solid var(--link); outline-offset: 3px; border-radius: 8px; }
+
+  /* The wave, as a rule. Used in three places and no more: under the words of the
+     cover, in the contact card, and where a paper has no figure. */
+  .wave { display: block; height: 6px; background: currentColor; -webkit-mask: var(--wave) repeat-x left center / 8px 6px; mask: var(--wave) repeat-x left center / 8px 6px; opacity: .7; }
+
+  /* What scrolls into view rises into place, once. Only when a script is there to
+     bring it in, and never for a reader who asked for less motion. */
+  .js [data-reveal] { opacity: 0; transform: translateY(22px); transition: opacity .7s var(--ease), transform .7s var(--ease); transition-delay: calc(var(--i, 0) * 70ms); }
+  .js [data-reveal].in { opacity: 1; transform: none; }
+
+  /* Pills */
+  .pill { display: inline-flex; align-items: center; justify-content: center; gap: 8px; min-height: 44px; padding: 0 20px; border-radius: 50px; border: 0; background: var(--tint); color: var(--ink); font: 500 .94rem var(--sans); text-decoration: none; cursor: pointer; white-space: nowrap; transition: background-color .2s ease, transform .2s var(--ease); }
+  .pill:hover { background: color-mix(in srgb, var(--ink) 13%, transparent); }
+  .pill:active { transform: scale(.97); }
+  .pill.solid { background: var(--ink); color: var(--bg); }
+  .pill.solid:hover { background: color-mix(in srgb, var(--ink) 85%, var(--bg)); }
+  .pill.small { min-height: 34px; padding: 0 14px; font-size: .82rem; }
+  .pill .arrow { transition: transform .25s var(--ease); }
+  .pill:hover .arrow { transform: translateY(3px); }
+
+  /* Navigation */
+  header { position: sticky; top: 0; z-index: 5; background: color-mix(in srgb, var(--bg) 86%, transparent); backdrop-filter: blur(16px); -webkit-backdrop-filter: blur(16px); transition: box-shadow .3s ease; }
+  header.scrolled { box-shadow: 0 1px 0 var(--line); }
+  .bar { display: flex; align-items: center; gap: 22px; height: 64px; }
+  .brand { display: flex; align-items: center; gap: 10px; font: 400 1.3rem var(--serif); letter-spacing: -0.02em; text-decoration: none; margin-right: auto; white-space: nowrap; }
+  .brand img { width: 30px; height: 30px; border-radius: 50%; object-fit: cover; }
+  nav { display: flex; gap: 24px; font-size: .94rem; }
+  nav a { text-decoration: none; color: var(--ink-2); position: relative; padding: 4px 0; }
+  nav a::after { content: ""; position: absolute; left: 0; right: 0; bottom: -3px; height: 6px; background: currentColor; -webkit-mask: var(--wave) repeat-x left center / 8px 6px; mask: var(--wave) repeat-x left center / 8px 6px; opacity: 0; transition: opacity .2s ease; }
+  nav a:hover, nav a.here { color: var(--ink); }
+  nav a.here::after { opacity: .8; }
+  .theme { display: inline-flex; padding: 3px; gap: 2px; border-radius: 50px; background: var(--tint); border: 0; cursor: pointer; }
+  .theme span { width: 30px; height: 28px; border-radius: 50px; display: grid; place-items: center; color: var(--ink-3); transition: background-color .25s ease, color .25s ease; }
+  .theme svg { width: 15px; height: 15px; }
+  [data-theme="light"] .theme .sun, [data-theme="dark"] .theme .moon { background: var(--surface); color: var(--ink); box-shadow: 0 1px 3px var(--line); }
+  @media (max-width: 720px) { nav { display: none; } }
+
+  /* The cover: the blue field, the folds moving on it, and noise over both. */
+  .cover { position: relative; overflow: hidden; border-radius: var(--card); background: var(--blue); color: var(--cream); min-height: clamp(500px, 58vw, 640px); display: grid; align-content: space-between; gap: 36px; padding: clamp(24px, 4.4vw, 56px); isolation: isolate; }
+  .cover canvas.folds { position: absolute; inset: 0; width: 100%; height: 100%; z-index: -2; --fit: width; --scale: .93; }
+  /* Gaussian noise, drawn by the page and laid over the field: the grain of the
+     printed cover, and where every sample of a generative model begins. */
+  .noise { position: absolute; inset: 0; z-index: -1; pointer-events: none; opacity: .5; mix-blend-mode: soft-light; background-size: 180px 180px; }
+  .cover .label { color: rgba(255,252,236,.86); letter-spacing: .01em; }
+  .cover-top { display: grid; gap: 18px; max-width: 700px; }
+  /* The words at the foot of the cover keep to the drawing's empty left third. */
+  .cover-foot { display: grid; gap: 18px; max-width: min(330px, 100%); }
+  .cover .lead { font: 400 clamp(1.25rem, 2.2vw, 1.7rem)/1.22 var(--serif); letter-spacing: -0.012em; }
+  .cover .sub { font-size: .95rem; color: rgba(255,252,236,.86); }
+  .cover .pill { background: rgba(255,252,236,.16); color: var(--cream); }
+  .cover .pill:hover { background: rgba(255,252,236,.28); }
+  .cover .pill.solid { background: var(--cream); color: var(--navy); }
+  .cover .pill.solid:hover { background: #fff; }
+  .actions { display: flex; flex-wrap: wrap; gap: 8px; align-items: center; }
+  /* Where to find me, one round button each. */
+  .socials { display: flex; flex-wrap: wrap; gap: 7px; }
+  .social { width: 40px; height: 40px; border-radius: 50%; display: grid; place-items: center; background: rgba(255,252,236,.16); color: var(--cream); text-decoration: none; font: 600 .66rem var(--sans); letter-spacing: -.01em; transition: background-color .2s ease, transform .25s var(--ease); }
+  .social:hover { background: var(--cream); color: var(--navy); transform: translateY(-2px); }
+  .social svg { width: 17px; height: 17px; fill: currentColor; }
+  /* The name comes up from behind its own baseline, and the rest follows. */
+  .rise { display: block; overflow: hidden; padding-bottom: .08em; }
+  .rise > span { display: block; }
+  .js .rise > span { transform: translateY(105%); animation: rise .9s var(--ease) forwards; animation-delay: calc(var(--i, 0) * 110ms + 80ms); }
+  .js .fade { opacity: 0; animation: fade .8s ease forwards; animation-delay: calc(var(--i, 0) * 110ms + 250ms); }
+  @keyframes rise { to { transform: none; } }
+  @keyframes fade { to { opacity: 1; } }
+  .js .cover .wave.fade { animation-name: fade-wave; }
+  @keyframes fade-wave { to { opacity: .7; } }
+  @media (max-width: 720px) {
+    /* On a phone the folds get a strip of their own under the words. */
+    .cover { min-height: 0; align-content: start; padding-bottom: 262px; }
+    .cover canvas.folds { inset: auto 0 0 0; height: 240px; --fit: cover; --scale: 1; }
+    .cover-foot { max-width: none; }
+  }
+
+  /* Research */
+  .about { display: grid; grid-template-columns: minmax(0, 1.05fr) minmax(0, 1fr); gap: clamp(28px, 6vw, 88px); align-items: start; }
+  .about .statement { font: 400 clamp(1.6rem, 3vw, 2.25rem)/1.18 var(--serif); letter-spacing: -0.02em; text-wrap: balance; }
+  .about .text { display: grid; gap: 18px; color: var(--ink-2); }
+  .portrait { display: flex; align-items: center; gap: 16px; margin-top: 28px; }
+  .portrait img { width: 84px; height: 84px; border-radius: 50%; object-fit: cover; }
+  .portrait p { font-size: .92rem; color: var(--ink-2); }
+  .portrait b { display: block; font: 400 1.15rem var(--serif); color: var(--ink); }
+  .chips { display: flex; flex-wrap: wrap; gap: 8px; }
+  .chip { font-size: .82rem; padding: 6px 13px; border-radius: 50px; background: var(--tint); color: var(--ink-2); }
+  @media (max-width: 820px) { .about { grid-template-columns: 1fr; } }
+
+  /* Publications */
+  .pub-head { display: flex; flex-wrap: wrap; align-items: end; justify-content: space-between; gap: 18px; }
+  .filters { display: flex; flex-wrap: wrap; gap: 6px; }
+  .filters .pill[aria-pressed="true"] { background: var(--ink); color: var(--bg); }
+  .year { display: grid; grid-template-columns: 96px minmax(0, 1fr); gap: 0 clamp(16px, 3vw, 40px); border-top: 1px solid var(--line-2); padding-top: 22px; margin-top: 34px; }
+  .year-mark { font: 400 clamp(1.6rem, 2.6vw, 2.1rem)/1 var(--serif); letter-spacing: -0.02em; color: var(--mark); position: sticky; top: 84px; align-self: start; }
+  .pubs { display: grid; gap: 12px; }
+  .pub { background: var(--surface); border-radius: 20px; padding: 16px; display: grid; grid-template-columns: 168px minmax(0, 1fr); gap: 20px; align-items: start; transition: transform .35s var(--ease), box-shadow .35s var(--ease), opacity .7s var(--ease); }
+  .pub:hover { box-shadow: 0 14px 34px var(--lift); }
+  .js .pub.in:hover { transform: translateY(-3px); }
+  /* The paper's main figure. Figures are drawn for white paper, so the tile stays white in both themes. */
+  .thumb { width: 100%; aspect-ratio: 4 / 3; border-radius: 12px; overflow: hidden; background: #fff; border: 1px solid var(--line); padding: 6px; display: grid; place-items: center; cursor: zoom-in; }
+  .thumb img { width: 100%; height: 100%; object-fit: contain; transition: transform .5s var(--ease); }
+  .pub:hover .thumb img { transform: scale(1.05); }
+  .thumb.none { background: var(--blue); color: var(--cream); border: 0; cursor: default; padding: 0 22%; }
+  .thumb.none .wave { width: 100%; }
+  .pub-body { display: grid; gap: 7px; padding: 4px 6px 4px 0; min-width: 0; }
+  .pub-venue { font-size: .84rem; color: var(--ink-2); display: flex; flex-wrap: wrap; align-items: center; gap: 4px 10px; }
+  .kind { font-size: .72rem; letter-spacing: .04em; text-transform: uppercase; color: var(--ink); background: var(--tint); border-radius: 50px; padding: 3px 9px; }
+  .pub[data-kind="journal"] .kind { background: var(--blue); color: var(--cream); }
+  .pub[data-kind="conference"] .kind { background: var(--navy); color: var(--cream); }
+  [data-theme="dark"] .pub[data-kind="conference"] .kind { background: var(--peri); color: var(--navy); }
+  .pub-title { font-size: clamp(1.12rem, 1.8vw, 1.32rem); line-height: 1.22; letter-spacing: -0.012em; }
+  .pub-title a { text-decoration: none; }
+  .pub-title a:hover { text-decoration: underline wavy 1px; text-underline-offset: 5px; text-decoration-color: var(--mark); }
+  .pub-authors { font-size: .92rem; color: var(--ink-2); }
+  .pub-authors b { font-weight: 600; color: var(--ink); }
+  .pub-links { display: flex; flex-wrap: wrap; gap: 6px; margin-top: 6px; align-items: flex-start; }
+  .bib { display: contents; }
+  .bib summary { list-style: none; }
+  .bib summary::-webkit-details-marker { display: none; }
+  .bib[open] summary { background: var(--ink); color: var(--bg); }
+  .bib-box { flex: 1 0 100%; position: relative; margin-top: 4px; background: var(--tint); border-radius: 14px; min-width: 0; }
+  .bib-box pre { margin: 0; padding: 16px; padding-right: 84px; font: .76rem/1.55 var(--mono); overflow-x: auto; white-space: pre; }
+  .bib-box .copy { position: absolute; top: 8px; right: 8px; background: var(--surface); }
+  .pub[hidden] { display: none; }
+  .year.empty { display: none; }
+  @media (max-width: 640px) {
+    .year { grid-template-columns: 1fr; gap: 14px; } .year-mark { position: static; }
+    .pub { grid-template-columns: 1fr; gap: 14px; padding: 14px; }
+    .thumb { aspect-ratio: 16 / 9; } .thumb.none { aspect-ratio: 16 / 5; padding: 0 30%; }
+    .pub-body { padding: 0 4px 4px; }
+  }
+  /* A figure, enlarged. */
+  dialog.figure { border: 0; padding: 14px; border-radius: 20px; background: #fff; max-width: min(1000px, 94vw); box-shadow: 0 30px 80px rgba(0,0,0,.4); }
+  dialog.figure::backdrop { background: rgba(10,12,30,.6); backdrop-filter: blur(4px); }
+  dialog.figure img { max-width: 100%; max-height: 82vh; margin: 0 auto; cursor: zoom-out; }
+
+  /* Experience */
+  .cv { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 14px; margin-top: clamp(26px, 4vw, 46px); }
+  .tile { background: var(--surface); border-radius: var(--card); padding: clamp(22px, 3vw, 34px); display: grid; gap: 16px; align-content: start; min-width: 0; }
+  .tile.wide { grid-column: 1 / -1; }
+  .tile h3 { font-size: clamp(1.4rem, 2.3vw, 1.8rem); letter-spacing: -0.02em; }
+  .rows { display: grid; gap: 0; }
+  .rows li { display: grid; grid-template-columns: 132px minmax(0, 1fr); gap: 4px 16px; padding: 13px 0; border-top: 1px solid var(--line); font-size: .94rem; }
+  .rows .when { color: var(--ink-3); font-variant-numeric: tabular-nums; font-size: .86rem; padding-top: 2px; }
+  .rows b { font-weight: 600; }
+  .rows span { color: var(--ink-2); }
+  .rows .where { color: var(--ink); }
+  @media (max-width: 820px) { .cv { grid-template-columns: 1fr; } }
+  @media (max-width: 520px) { .rows li { grid-template-columns: 1fr; } }
+
+  /* Other Projects */
+  .projects-grid { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 14px; margin-top: clamp(20px, 3vw, 32px); }
+  .project-tile { background: var(--surface); border-radius: var(--card); padding: clamp(20px, 2.5vw, 28px); display: flex; flex-direction: column; justify-content: space-between; gap: 18px; min-width: 0; transition: transform .35s var(--ease), box-shadow .35s var(--ease); }
+  .project-tile:hover { box-shadow: 0 12px 30px var(--lift); }
+  .js .project-tile[data-reveal]:hover { transform: translateY(-3px); }
+  .project-top { display: grid; gap: 8px; }
+  .project-tag { font-size: .74rem; font-weight: 600; text-transform: uppercase; letter-spacing: .06em; color: var(--mark); }
+  .project-tile h3 { font-size: clamp(1.2rem, 1.8vw, 1.45rem); letter-spacing: -0.02em; margin: 0; }
+  .project-tile p { font-size: .88rem; line-height: 1.48; color: var(--ink-2); margin: 0; }
+  .project-links { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 4px; }
+  .project-links .pill { min-height: 32px; padding: 0 13px; font-size: .80rem; }
+  @media (max-width: 820px) { .projects-grid { grid-template-columns: 1fr; } }
+
+  /* Contact */
+  .contact { position: relative; overflow: hidden; isolation: isolate; border-radius: var(--card); background: var(--navy); color: var(--cream); padding: clamp(32px, 6vw, 84px) clamp(24px, 5vw, 64px); display: grid; gap: 22px; min-height: 360px; align-content: center; }
+  .contact canvas.folds { position: absolute; inset: 0; width: 100%; height: 100%; z-index: -2; --fit: width; --scale: .7; }
+  .contact .noise { opacity: .35; }
+  .contact .label { color: rgba(255,252,236,.75); }
+  .contact h2 { max-width: 14ch; }
+  .contact .mail { font: 400 clamp(1.1rem, 2.2vw, 1.5rem) var(--serif); color: var(--cream); text-decoration: none; overflow-wrap: anywhere; justify-self: start; }
+  .contact .mail:hover { text-decoration: underline wavy 1px; text-underline-offset: 6px; }
+  .contact .wave { width: min(330px, 100%); }
+  .contact .actions { max-width: 440px; }
+  .contact .pill { background: rgba(255,252,236,.14); color: var(--cream); }
+  .contact .pill:hover { background: rgba(255,252,236,.26); }
+  @media (max-width: 720px) { .contact { padding-bottom: 200px; } .contact canvas.folds { inset: auto 0 0 0; height: 190px; --fit: cover; --scale: 1; } .contact .actions { max-width: none; } }
+
+  footer { padding-block: 30px 44px; color: var(--ink-3); font-size: .84rem; }
+  footer .wrap { display: flex; flex-wrap: wrap; gap: 6px 24px; justify-content: space-between; }
+  footer a { color: var(--ink-2); }
+
+  @media (prefers-reduced-motion: reduce) {
+    html { scroll-behavior: auto; }
+    *, .js [data-reveal], .js .rise > span, .js .fade { transition: none !important; animation: none !important; }
+    .js [data-reveal], .js .fade { opacity: 1; transform: none; }
+    .js .rise > span { transform: none; }
+  }
+  [hidden] { display: none !important; }
+</style>
+</head>
+<body>
+
+<svg width="0" height="0" style="position:absolute" aria-hidden="true">
+  <symbol id="i-github" viewBox="0 0 16 16"><path d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27s1.36.09 2 .27c1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.01 8.01 0 0 0 16 8c0-4.42-3.58-8-8-8z"/></symbol>
+  <symbol id="i-linkedin" viewBox="0 0 24 24"><path d="M9.237 8.855v12.139h3.769v-6.003c0-1.584.298-3.118 2.262-3.118 1.937 0 1.961 1.811 1.961 3.218v5.904H21v-6.657c0-3.27-.704-5.783-4.526-5.783-1.835 0-3.065 1.007-3.568 1.96h-.051v-1.66H9.237zm-6.142 0H6.87v12.139H3.095z"/><circle cx="4.983" cy="5.009" r="2.188"/></symbol>
+  <symbol id="i-x" viewBox="0 0 24 24"><path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z"/></symbol>
+  <symbol id="i-scholar" viewBox="0 0 24 24"><path d="M12 3 1 9l11 6 9-4.91V17h2V9L12 3zM5 13.18v4L12 21l7-3.82v-4L12 17l-7-3.82z"/></symbol>
+  <symbol id="i-mail" viewBox="0 0 24 24"><path d="M20 4H4c-1.1 0-2 .9-2 2v12c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V6c0-1.1-.9-2-2-2zm0 14H4V8l8 5 8-5v10zm-8-7L4 6h16l-8 5z"/></symbol>
+</svg>
+
+<header id="header">
+  <div class="wrap bar">
+    <a class="brand" href="#top"><img src="assets/avatar.jpg" width="30" height="30" alt="">Danilo Danese</a>
+    <nav aria-label="Sections">
+      <a href="#research">Research</a>
+      <a href="#publications">Publications</a>
+      <a href="#cv">Experience</a>
+      <a href="#projects">Projects</a>
+      <a href="#contact">Contact</a>
+    </nav>
+    <button class="theme" id="theme" type="button" aria-label="Switch between light and dark">
+      <span class="sun"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><circle cx="12" cy="12" r="4"/><path d="M12 2v2M12 20v2M2 12h2M20 12h2M4.9 4.9l1.4 1.4M17.7 17.7l1.4 1.4M4.9 19.1l1.4-1.4M17.7 6.3l1.4-1.4"/></svg></span>
+      <span class="moon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 14.5A8 8 0 0 1 9.5 4a8 8 0 1 0 10.5 10.5z"/></svg></span>
+    </button>
+  </div>
+</header>
+
+<main id="top">
+<div class="wrap">
+  <section class="cover" id="cover" aria-label="Introduction">
+    <canvas class="folds" data-folds aria-hidden="true"></canvas>
+    <div class="noise" aria-hidden="true"></div>
+    <div class="cover-top">
+      <p class="label fade" style="--i:0">AI researcher · Generative models for medical imaging</p>
+      <h1><span class="rise" style="--i:1"><span>Danilo Danese</span></span></h1>
+    </div>
+    <div class="cover-foot">
+      <p class="lead fade" style="--i:3">Generative AI for high-dimensional, low-sample-size domains.</p>
+      <p class="sub fade" style="--i:4">Flow matching and diffusion for full-resolution 3D brain MRI.</p>
+      <i class="wave fade" style="--i:5"></i>
+      <div class="actions fade" style="--i:5">
+        <a class="pill solid" href="#publications">Publications <span class="arrow" aria-hidden="true">↓</span></a>
+        <a class="pill" href="#contact">Contact me</a>
+      </div>
+      <div class="socials fade" style="--i:6">
+        <a class="social" href="https://www.linkedin.com/in/danilodanese" rel="noopener" aria-label="LinkedIn" title="LinkedIn"><svg><use href="#i-linkedin"/></svg></a>
+        <a class="social" href="https://x.com/danilo_danese" rel="noopener" aria-label="X" title="X"><svg><use href="#i-x"/></svg></a>
+        <a class="social" href="https://github.com/Danesed" rel="noopener" aria-label="GitHub" title="GitHub"><svg><use href="#i-github"/></svg></a>
+        <a class="social" href="https://scholar.google.com/citations?user=ZH-iXrkAAAAJ" rel="noopener" aria-label="Google Scholar" title="Google Scholar"><svg><use href="#i-scholar"/></svg></a>
+        <a class="social" href="https://dblp.org/pid/372/0698" rel="noopener" aria-label="dblp" title="dblp">dblp</a>
+        <a class="social" href="https://orcid.org/0009-0000-5203-1229" rel="noopener" aria-label="ORCID" title="ORCID">iD</a>
+        <a class="social" href="#contact" data-mail="danilo.danese|poliba.it" aria-label="Email" title="Email"><svg><use href="#i-mail"/></svg></a>
+      </div>
+    </div>
+  </section>
+</div>
+
+<section class="block" id="research">
+  <div class="wrap">
+    <div class="about">
+      <div data-reveal>
+        <p class="label">Research</p>
+        <p class="statement" style="margin-top:14px">Scalable generative models for high-dimensional, low-sample-size domains.</p>
+        <div class="portrait">
+          <img src="assets/avatar.jpg" width="84" height="84" alt="Portrait of Danilo Danese">
+          <p><b>Danilo Danese</b>Politecnico di Bari · SisInfLab<br>Previously: Visiting researcher, University College London; Queen Square Analytics</p>
+        </div>
+      </div>
+      <div class="text" data-reveal style="--i:1">
+        <p>My research combines flow- and diffusion-based synthesis for 3D data augmentation in structured multi-scale representations with multimodal semantic representations from large vision–language models, with a focus on XAI-driven model interpretability, systematic evaluation frameworks, and reproducible experimental design.</p>
+        <p>A central thread of my work is the design and validation of 3D generative models for full-resolution brain MRI, integrating multi-site preprocessing workflows and anatomy-aware evaluation as core components of the research pipeline.</p>
+        <div class="chips" aria-label="Research topics">
+          <span class="chip">Flow matching</span><span class="chip">Diffusion</span><span class="chip">Wavelets</span><span class="chip">3D brain MRI</span><span class="chip">Brain-age modeling</span><span class="chip">Explainable AI</span><span class="chip">Multimodal recommendation</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="block" id="publications" style="padding-top:0">
+  <div class="wrap">
+    <div class="pub-head" data-reveal>
+      <h2>Publications</h2>
+      <div class="filters" id="filters" role="group" aria-label="Filter publications" hidden>
+        <button class="pill small" type="button" data-filter="all" aria-pressed="true">All</button>
+        <button class="pill small" type="button" data-filter="journal" aria-pressed="false">Journals</button>
+        <button class="pill small" type="button" data-filter="conference" aria-pressed="false">Conferences</button>
+        <button class="pill small" type="button" data-filter="preprint" aria-pressed="false">Preprints</button>
+      </div>
+    </div>
+<!--PUBLICATIONS-->
+  </div>
+</section>
+
+<section class="block" id="cv" style="padding-top:0">
+  <div class="wrap">
+    <p class="label" data-reveal>Experience</p>
+    <h2 style="margin-top:14px" data-reveal>Industry, research and teaching</h2>
+    <div class="cv">
+      <article class="tile wide" data-reveal>
+        <h3>Experience</h3>
+        <ol class="rows">
+          <li><span class="when">From Jul 2026</span><div><b>Visiting researcher</b> · <span class="where">MANIFOLD Lab, University College London</span><br><span>Deep-learning super-resolution for portable 64 mT MRI: generative modelling and wavelet-based architectures for anisotropic reconstruction and cross-field image enhancement.</span></div></li>
+          <li><span class="when">Apr – Jul 2026</span><div><b>Imaging research scientist intern</b> · <span class="where">Queen Square Analytics, London</span><br><span>Designed and deployed production-ready deep-learning pipelines for longitudinal and cross-sectional MRI brain atrophy quantification: inference optimisation, automated quality control and cloud-native processing on AWS.</span></div></li>
+          <li><span class="when">Nov 2023 – Oct 2026</span><div><b>Ph.D., generative deep models</b> · <span class="where">Politecnico di Bari</span><br><span>Generative models for full-resolution 3D brain MRI, wavelet-domain flow matching, brain-age modelling, anatomy-aware evaluation and explainable AI. Thesis: <i>Reliable Representation Learning under Constrained Supervision</i>.</span></div></li>
+          <li><span class="when">May – Nov 2023</span><div><b>Research fellow</b> · <span class="where">SisInfLab, Politecnico di Bari</span><br><span>Deep learning and time-series analysis of multispectral satellite imagery, to study <i>Xylella fastidiosa</i>.</span></div></li>
+          <li><span class="when">Sep 2022 – Apr 2023</span><div><b>Research internship</b> · <span class="where">SisInfLab, Politecnico di Bari</span><br><span>A virtual reality system for furniture showrooms based on generative AI, built with a company in the sector.</span></div></li>
+        </ol>
+      </article>
+      <article class="tile" data-reveal>
+        <h3>Education</h3>
+        <ol class="rows">
+          <li><span class="when">2023 – 2026</span><div><b>Ph.D. in Electrical and Information Engineering</b><br><span>Politecnico di Bari. Supervisors: Prof. Tommaso Di Noia and Prof. Angela Lombardi.</span></div></li>
+          <li><span class="when">2023</span><div><b>M.S. in Computer Science Engineering</b><br><span>Politecnico di Bari, Information Systems.</span></div></li>
+          <li><span class="when">2019</span><div><b>B.S. in Computer Science and Automation Engineering</b><br><span>Politecnico di Bari.</span></div></li>
+        </ol>
+      </article>
+      <article class="tile" data-reveal style="--i:1">
+        <h3>Projects</h3>
+        <ol class="rows">
+          <li><span class="when">2024 – present</span><div><b>MISTRAL, European research project</b><br><span>AI for health-impact assessment and the prediction of disability-related costs.</span></div></li>
+          <li><span class="when">2023 – 2026</span><div><b>OMIBREED, national research project</b><br><span>Data intake, omics analysis and deep-learning workflows for <i>Xylella fastidiosa</i>.</span></div></li>
+          <li><span class="when">2024</span><div><b>Industry research project</b><br><span>Privacy-preserving federated learning for sensitive health data.</span></div></li>
+        </ol>
+      </article>
+      <article class="tile" data-reveal>
+        <h3>Teaching</h3>
+        <ol class="rows">
+          <li><span class="when">2024 – 2026</span><div><b>Teaching assistant, Politecnico di Bari</b><br><span>Deep Learning; Foundations of Machine Learning.</span></div></li>
+          <li><span class="when">2024 – 2025</span><div><b>Lecturer, ITS Academy Apulia Digital Maker</b><br><span>Artificial Intelligence and Network Security.</span></div></li>
+        </ol>
+      </article>
+      <article class="tile" data-reveal style="--i:1">
+        <h3>Service</h3>
+        <ol class="rows">
+          <li><span class="when">Organisation</span><div><span>Local Organization Chair, Brain Informatics 2025. Program Committee member, ECAI 2025. Student volunteer, ACM RecSys 2024.</span></div></li>
+          <li><span class="when">Reviewer</span><div><span>NeurIPS; ICLR 2025 and 2026; CVPR 2026; MICCAI 2026; AAAI 2025; ECAI 2025; CIKM 2025 and 2026; RecSys 2024; ECIR 2025; UMAP 2025; xAI 2025; Brain Informatics 2025; ACL Rolling Review 2026; Data Mining and Knowledge Discovery; Scientific Reports.</span></div></li>
+        </ol>
+      </article>
+    </div>
+  </div>
+</section>
+
+<section class="block" id="projects" style="padding-top:0">
+  <div class="wrap">
+    <p class="label" data-reveal>Other projects</p>
+    <h2 style="margin-top:14px" data-reveal>Open source &amp; tools</h2>
+    <div class="projects-grid">
+      <article class="project-tile" data-reveal>
+        <div class="project-top">
+          <span class="project-tag">macOS App</span>
+          <h3>μStats</h3>
+          <p>A lightweight, pixel-snapped system statistics monitor for the Mac menu bar.</p>
+        </div>
+        <div class="project-links">
+          <a class="pill small" href="https://danesed.github.io/muStats/" target="_blank" rel="noopener">Website</a>
+          <a class="pill small" href="https://github.com/Danesed/muStats" target="_blank" rel="noopener">GitHub</a>
+        </div>
+      </article>
+
+      <article class="project-tile" data-reveal style="--i:1">
+        <div class="project-top">
+          <span class="project-tag">VS Code Extension</span>
+          <h3>AgentMux</h3>
+          <p>Multi-agent tmux sidebar for VS Code connecting Claude, Codex, Antigravity, and Devin.</p>
+        </div>
+        <div class="project-links">
+          <a class="pill small" href="https://marketplace.visualstudio.com/items?itemName=Danesed.claude-tmux-sidebar" target="_blank" rel="noopener">Marketplace</a>
+          <a class="pill small" href="https://github.com/Danesed/claude-tmux-sidebar" target="_blank" rel="noopener">GitHub</a>
+        </div>
+      </article>
+
+      <article class="project-tile" data-reveal style="--i:2">
+        <div class="project-top">
+          <span class="project-tag">VS Code Themes</span>
+          <h3>Color Sea</h3>
+          <p>A vibrant collection of deep, high-contrast dark color themes tailored for VS Code.</p>
+        </div>
+        <div class="project-links">
+          <a class="pill small" href="https://marketplace.visualstudio.com/items?itemName=danesed.color-sea" target="_blank" rel="noopener">Marketplace</a>
+          <a class="pill small" href="https://github.com/danesed/colorsea-vscode" target="_blank" rel="noopener">GitHub</a>
+        </div>
+      </article>
+    </div>
+  </div>
+</section>
+
+<section class="block" id="contact" style="padding-top:0">
+  <div class="wrap">
+    <div class="contact" data-reveal>
+      <canvas class="folds" data-folds="navy" aria-hidden="true"></canvas>
+      <div class="noise" data-live aria-hidden="true"></div>
+      <h2>Contact me</h2>
+      <a class="mail" href="#contact" data-mail="danilo.danese|poliba.it">danilo.danese [at] poliba.it</a>
+      <i class="wave"></i>
+      <div class="actions">
+        <a class="pill" href="https://www.linkedin.com/in/danilodanese" rel="noopener">LinkedIn</a>
+        <a class="pill" href="https://x.com/danilo_danese" rel="noopener">X</a>
+        <a class="pill" href="https://github.com/Danesed" rel="noopener">GitHub</a>
+        <a class="pill" href="https://scholar.google.com/citations?user=ZH-iXrkAAAAJ" rel="noopener">Google Scholar</a>
+        <a class="pill" href="https://dblp.org/pid/372/0698" rel="noopener">dblp</a>
+        <a class="pill" href="https://orcid.org/0009-0000-5203-1229" rel="noopener">ORCID</a>
+        <a class="pill" href="https://sisinflab.poliba.it/people/danilo-danese/" rel="noopener">SisInfLab</a>
+      </div>
+    </div>
+  </div>
+</section>
+</main>
+
+<footer>
+  <div class="wrap">
+    <span>© Danilo Danese</span>
+    <span>The moving curves are cortical folds traced from my brain MRI. Publications from <a href="https://dblp.org/pid/372/0698">dblp</a>.</span>
+  </div>
+</footer>
+
+<dialog class="figure" id="figure"><img alt="The paper's main figure, enlarged"></dialog>
+
+<script>
+const root = document.documentElement;
+const still = matchMedia("(prefers-reduced-motion: reduce)").matches;
+
+// Theme
+document.getElementById("theme").addEventListener("click", () => {
+  root.dataset.theme = root.dataset.theme === "dark" ? "light" : "dark";
+  try { localStorage.setItem("theme", root.dataset.theme); } catch (e) {}
+});
+
+// What scrolls into view rises into place, once.
+const reveal = new IntersectionObserver(entries => {
+  for (const entry of entries) {
+    if (!entry.isIntersecting) continue;
+    entry.target.classList.add("in");
+    reveal.unobserve(entry.target);
+  }
+}, { rootMargin: "0px 0px -8% 0px", threshold: 0.05 });
+for (const element of document.querySelectorAll("[data-reveal]")) reveal.observe(element);
+
+// The header draws its rule once the page has moved, and the navigation marks the
+// section being read with the wave.
+const header = document.getElementById("header");
+const links = [...document.querySelectorAll("nav a")];
+const sections = links.map(a => document.querySelector(a.getAttribute("href")));
+function place() {
+  header.classList.toggle("scrolled", scrollY > 8);
+  const line = innerHeight * 0.35;
+  let current = -1;
+  sections.forEach((section, index) => { if (section && section.getBoundingClientRect().top < line) current = index; });
+  links.forEach((a, index) => a.classList.toggle("here", index === current));
+}
+addEventListener("scroll", place, { passive: true });
+place();
+
+// The address is written with [at] and put together only on a click, so it is not
+// in the page for a harvester to read.
+for (const link of document.querySelectorAll("[data-mail]")) {
+  link.addEventListener("click", event => {
+    event.preventDefault();
+    const [user, domain] = link.dataset.mail.split("|");
+    location.href = "mailto:" + user + "@" + domain;
+  });
+}
+
+// Publications: a filter by kind, a copy button on each BibTeX entry, and the
+// figure enlarged on a click.
+const filters = document.getElementById("filters");
+const pubs = [...document.querySelectorAll(".pub")];
+if (pubs.length) {
+  filters.hidden = false;
+  for (const button of filters.querySelectorAll("button")) {
+    const kind = button.dataset.filter;
+    const count = kind === "all" ? pubs.length : pubs.filter(p => p.dataset.kind === kind).length;
+    if (!count) { button.hidden = true; continue; }
+    button.addEventListener("click", () => {
+      for (const other of filters.querySelectorAll("button")) other.setAttribute("aria-pressed", other === button);
+      for (const pub of pubs) { pub.hidden = kind !== "all" && pub.dataset.kind !== kind; pub.classList.add("in"); }
+      for (const year of document.querySelectorAll(".year")) {
+        year.classList.toggle("empty", !year.querySelector(".pub:not([hidden])"));
+      }
+    });
+  }
+}
+for (const button of document.querySelectorAll(".bib .copy")) {
+  button.addEventListener("click", async () => {
+    const text = button.parentElement.querySelector("pre").textContent;
+    try {
+      await navigator.clipboard.writeText(text);
+      button.textContent = "Copied";
+      setTimeout(() => { button.textContent = "Copy"; }, 1400);
+    } catch (e) {
+      const range = document.createRange();
+      range.selectNodeContents(button.parentElement.querySelector("pre"));
+      const selection = getSelection(); selection.removeAllRanges(); selection.addRange(range);
+    }
+  });
+}
+const figure = document.getElementById("figure");
+for (const thumb of document.querySelectorAll(".thumb[data-figure]")) {
+  thumb.addEventListener("click", () => {
+    if (!figure.showModal) return;
+    figure.querySelector("img").src = thumb.dataset.figure;
+    figure.showModal();
+  });
+}
+figure.addEventListener("click", () => figure.close());
+
+// Gaussian noise. Each pixel of a tile is a draw from a normal distribution
+// (Box-Muller), and the tile is laid over a field as its grain. On the cover the
+// grain is still, as on the printed thesis. In the contact card it changes a few
+// times a second, the way film grain does, and only while the card is on screen.
+function gaussianTile(size) {
+  const canvas = document.createElement("canvas");
+  canvas.width = canvas.height = size;
+  const context = canvas.getContext("2d"), image = context.createImageData(size, size), data = image.data;
+  for (let i = 0; i < data.length; i += 4) {
+    const z = Math.sqrt(-2 * Math.log(1 - Math.random())) * Math.cos(2 * Math.PI * Math.random());
+    const value = Math.max(0, Math.min(255, 128 + z * 46));
+    data[i] = data[i + 1] = data[i + 2] = value; data[i + 3] = 255;
+  }
+  context.putImageData(image, 0, 0);
+  return "url(" + canvas.toDataURL() + ")";
+}
+const noiseLayers = [...document.querySelectorAll(".noise")];
+if (noiseLayers.length) {
+  const first = gaussianTile(180);
+  for (const layer of noiseLayers) layer.style.backgroundImage = first;
+  const live = noiseLayers.filter(layer => layer.hasAttribute("data-live"));
+  if (live.length && !still) {
+    const tiles = [first, gaussianTile(180), gaussianTile(180), gaussianTile(180)];
+    let frame = 0;
+    const onScreen = new Set();
+    const watch = new IntersectionObserver(entries => {
+      for (const entry of entries) entry.isIntersecting ? onScreen.add(entry.target) : onScreen.delete(entry.target);
+    });
+    for (const layer of live) watch.observe(layer);
+    setInterval(() => {
+      if (document.hidden || !onScreen.size) return;
+      frame++;
+      for (const layer of onScreen) layer.style.backgroundImage = tiles[frame % tiles.length];
+    }, 140);
+  }
+}
+
+// The folds. Each frame is one sagittal slice of my brain MRI: four curves, the
+// grey/white boundary at four depths. The drawing moves slowly from one slice to
+// the next and back, so the folds change the way they do when you scroll through a
+// scan, and the pointer nudges it a slice either way. It rests where the thesis
+// cover was cut, runs only while it is on screen, and stands still for anyone who
+// asked their system for less motion.
+class Folds {
+  constructor(canvas, data) {
+    this.canvas = canvas; this.context = canvas.getContext("2d"); this.data = data;
+    this.navy = canvas.dataset.folds === "navy";
+    this.field = this.navy ? "#0A1660" : data.field;
+    this.colors = this.navy ? ["#FFFCEC", "#9DB0FF", "#FF6A4D", "#133BFF"] : data.colors;
+    this.position = data.rest; this.direction = 1; this.visible = false; this.last = 0;
+    this.nudge = 0; this.lean = 0;
+    new ResizeObserver(() => this.resize()).observe(canvas);
+    new IntersectionObserver(entries => { this.visible = entries[0].isIntersecting; this.start(); }).observe(canvas);
+    document.addEventListener("visibilitychange", () => this.start());
+    const card = canvas.parentElement;
+    card.addEventListener("pointermove", event => {
+      const box = card.getBoundingClientRect();
+      this.nudge = ((event.clientX - box.left) / box.width - 0.5) * 1.6;
+    });
+    card.addEventListener("pointerleave", () => { this.nudge = 0; });
+    this.resize();
+  }
+  resize() {
+    const scale = Math.min(window.devicePixelRatio || 1, 2);
+    const box = this.canvas.getBoundingClientRect();
+    if (!box.width || !box.height) return;
+    this.canvas.width = Math.round(box.width * scale);
+    this.canvas.height = Math.round(box.height * scale);
+    const style = getComputedStyle(this.canvas);
+    this.cover = style.getPropertyValue("--fit").trim() === "cover";
+    this.scale = parseFloat(style.getPropertyValue("--scale")) || 1;
+    this.draw();
+  }
+  // One loop at most, and none while the canvas is off screen or the tab is hidden.
+  start() {
+    if (this.running || still || !this.visible || document.hidden) return;
+    this.running = true;
+    requestAnimationFrame(t => this.tick(t));
+  }
+  tick(time) {
+    if (!this.visible || document.hidden) { this.last = 0; this.running = false; return; }
+    // Thirty frames a second is more than a shape that takes nine seconds to
+    // change needs; the rest of each second is left to the page.
+    if (time - this.last >= 33) {
+      const elapsed = this.last ? Math.min(time - this.last, 100) : 0;
+      this.last = time;
+      const top = this.data.frames.length - 1;
+      this.position += this.direction * elapsed / Folds.secondsPerSlice / 1000;
+      if (this.position >= top) { this.position = top; this.direction = -1; }
+      if (this.position <= 0) { this.position = 0; this.direction = 1; }
+      this.lean += (this.nudge - this.lean) * 0.06;
+      this.draw();
+    }
+    requestAnimationFrame(t => this.tick(t));
+  }
+  points(curve) {
+    const frames = this.data.frames, top = frames.length - 1;
+    const at = Math.max(0, Math.min(top, this.position + this.lean));
+    const index = Math.min(Math.floor(at), top - 1);
+    let u = at - index;
+    u = u * u * (3 - 2 * u);   // ease in and out of every slice
+    const a = frames[index][curve], b = frames[index + 1][curve], out = new Float32Array(a.length);
+    for (let i = 0; i < a.length; i++) out[i] = a[i] + (b[i] - a[i]) * u;
+    return out;
+  }
+  draw() {
+    const { canvas, context: c, data } = this;
+    const [vw, vh] = data.view, w = canvas.width, h = canvas.height;
+    c.setTransform(1, 0, 0, 1, 0, 0);
+    c.fillStyle = this.field; c.fillRect(0, 0, w, h);
+    // Anchored to the right and bottom edges, where the folds are.
+    const s = (this.cover ? Math.max(w / vw, h / vh) : w / vw) * this.scale;
+    const t = data.transform, turn = t.rotate * Math.PI / 180;
+    c.translate(w - vw * s, h - vh * s); c.scale(s, s);
+    c.translate(t.tx, t.ty); c.translate(t.cx, t.cy); c.rotate(turn); c.translate(-t.cx, -t.cy);
+    c.lineWidth = data.strokeWidth; c.lineCap = "round"; c.lineJoin = "round";
+    for (let j = 0; j < data.colors.length; j++) {
+      const p = this.points(j), n = p.length;
+      // The field again under each curve, so a band hides the ones behind it.
+      c.beginPath(); c.moveTo(p[0], vh + 4000);
+      for (let i = 0; i < n; i += 2) c.lineTo(p[i], p[i + 1]);
+      c.lineTo(p[n - 2], vh + 4000); c.closePath();
+      c.fillStyle = this.field; c.fill();
+      // The band, carried past both ends along its own direction so it never stops in mid-air.
+      const far = 6000;
+      const ax = p[0] - p[2], ay = p[1] - p[3], al = Math.hypot(ax, ay) || 1;
+      const bx = p[n - 2] - p[n - 4], by = p[n - 1] - p[n - 3], bl = Math.hypot(bx, by) || 1;
+      c.beginPath(); c.moveTo(p[0] + ax / al * far, p[1] + ay / al * far);
+      for (let i = 0; i < n; i += 2) c.lineTo(p[i], p[i + 1]);
+      c.lineTo(p[n - 2] + bx / bl * far, p[n - 1] + by / bl * far);
+      c.strokeStyle = this.colors[j]; c.stroke();
+    }
+  }
+}
+Folds.secondsPerSlice = 9;
+
+fetch("assets/gyri.json").then(r => r.json()).then(data => {
+  for (const canvas of document.querySelectorAll("canvas[data-folds]")) new Folds(canvas, data);
+}).catch(() => {});
+</script>
+</body>
+</html>

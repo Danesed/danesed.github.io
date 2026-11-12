@@ -1,0 +1,51 @@
+{
+  "links": {
+    "journals/eswa/AttimonelliDFMPN26": {
+      "Code": "https://github.com/sisinflab/Ducho"
+    },
+    "conf/www/AttimonelliDMPG24": {
+      "Code": "https://github.com/sisinflab/Ducho"
+    },
+    "journals/mia/DaneseLAFN26": {
+      "Code": "https://github.com/Danesed/FlowLet",
+      "Project page": "https://danesed.github.io/flowlet-page/"
+    },
+    "conf/miccai/DaneseLFAN26": {
+      "Code": "https://github.com/Danesed/WaveDiT",
+      "Project page": "https://danesed.github.io/wavedit-page/"
+    },
+    "conf/miccai/DaneseLN26": {
+      "Code": "https://github.com/Danesed/WaveUDiT"
+    },
+    "journals/corr/abs-2607-27974": {
+      "Code": "https://github.com/Danesed/WaveUDiT"
+    }
+  },
+  "same": [
+    [
+      "journals/eswa/AttimonelliDFMPN26",
+      "journals/corr/abs-2409-15857"
+    ],
+    [
+      "conf/miccai/DaneseLN26",
+      "journals/corr/abs-2607-27974"
+    ]
+  ],
+  "publications": [
+    {
+      "key": "conf/miccai/DaneseLN26",
+      "kind": "conference",
+      "title": "Now You Have My Healthy Attention: A U-DiT for Brain-MRI Inpainting",
+      "authors": [
+        "Danilo Danese",
+        "Angela Lombardi",
+        "Tommaso Di Noia"
+      ],
+      "venue": "MICCAI (BraTS Challenge, Oral)",
+      "year": 2026,
+      "published": 2026,
+      "doi": "10.48550/ARXIV.2607.27974",
+      "url": "https://arxiv.org/abs/2607.27974"
+    }
+  ]
+}

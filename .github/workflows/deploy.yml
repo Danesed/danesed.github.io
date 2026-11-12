@@ -3,11 +3,10 @@ name: Deploy to GitHub Pages
 on:
   push:
     branches: [main]
-  # Weekly refresh so new Semantic Scholar entries show up automatically.
-  # Mondays at 06:00 UTC.
+  # Every day at 05:30 UTC, so a paper dblp has just indexed shows up by itself.
   schedule:
-    - cron: "0 6 * * 1"
-  # "Run workflow" button in the Actions tab for on-demand rebuilds.
+    - cron: "30 5 * * *"
+  # "Run workflow" in the Actions tab, for a rebuild on demand.
   workflow_dispatch:
 
 permissions:
@@ -15,29 +14,29 @@ permissions:
   pages: write
   id-token: write
 
-jobs:
-  build:
-    runs-on: ubuntu-latest
-    steps:
-      - name: Checkout
-        uses: actions/checkout@v4
-      - name: Build
-        uses: withastro/action@v3
-        with:
-          # Astro 6 requires Node >=22.12; the action defaults to Node 20.
-          node-version: 22
-        env:
-          # Optional: set a Semantic Scholar API key in repo secrets to lift
-          # the unauthenticated rate limit. Build still works without it.
-          SEMANTIC_SCHOLAR_API_KEY: ${{ secrets.SEMANTIC_SCHOLAR_API_KEY }}
+concurrency:
+  group: pages
+  cancel-in-progress: true
 
+jobs:
   deploy:
-    needs: build
     runs-on: ubuntu-latest
     environment:
       name: github-pages
       url: ${{ steps.deployment.outputs.page_url }}
     steps:
-      - name: Deploy to GitHub Pages
-        id: deployment
+      - uses: actions/checkout@v4
+
+      # Standard library only: the Python on the runner is enough. When dblp cannot
+      # be reached the build uses data/publications.json and still deploys.
+      - name: Build
+        run: python3 build.py
+
+      - uses: actions/configure-pages@v5
+
+      - uses: actions/upload-pages-artifact@v3
+        with:
+          path: _site
+
+      - id: deployment
         uses: actions/deploy-pages@v4

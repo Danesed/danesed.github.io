@@ -1,22 +1,8 @@
-# build output
-dist/
-.cache
-# dependencies
-node_modules/
+# Output of build.py.
+_site/
 
-# logs
-npm-debug.log*
-yarn-debug.log*
-yarn-error.log*
-pnpm-debug.log*
-
-
-# environment variables
-.env
-.env.production
-
-# macOS-specific files
+__pycache__/
 .DS_Store
 
-# Astro
-.astro/
+# Local assistant settings.
+.claude/
