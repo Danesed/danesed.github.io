@@ -11,16 +11,16 @@
       "Project page": "https://danesed.github.io/flowlet-page/"
     },
     "conf/miccai/DaneseLFAN26": {
-      "Code": "https://github.com/Danesed/WaveDiT",
+      "Code": "https://github.com/sisinflab/WaveDiT",
       "Project page": "https://danesed.github.io/wavedit-page/",
       "Demo": "https://huggingface.co/spaces/danesed/WaveDiT-demo",
       "macOS App": "https://github.com/sisinflab/WaveDiT/tree/macos-app"
     },
     "conf/miccai/DaneseLN26": {
-      "Code": "https://github.com/Danesed/WaveUDiT"
+      "Code": "https://github.com/sisinflab/WaveUDiT"
     },
     "journals/corr/abs-2607-27974": {
-      "Code": "https://github.com/Danesed/WaveUDiT"
+      "Code": "https://github.com/sisinflab/WaveUDiT"
     },
     "journals/braininf/LombardiFC26": {
       "Code": "https://github.com/sisinflab/STABLE-BAG"
@@ -46,11 +46,25 @@
         "Angela Lombardi",
         "Tommaso Di Noia"
       ],
-      "venue": "MICCAI (BraTS Challenge, Oral)",
+      "venue": "MICCAI (BraTS Local Synthesis, Oral)",
       "year": 2026,
       "published": 2026,
       "doi": "10.48550/ARXIV.2607.27974",
       "url": "https://arxiv.org/abs/2607.27974"
+    },
+    {
+      "key": "conf/miccai/Danese26ds",
+      "kind": "conference",
+      "title": "From Explanation Stability to Wavelet-Domain Generation: Trustworthy Brain Age Modeling from Structural MRI",
+      "authors": [
+        "Danilo Danese"
+      ],
+      "venue": "MICCAI Doctoral Symposium",
+      "year": 2026,
+      "published": 2026,
+      "links": {
+        "Program": "https://miccai-sb.github.io/msb-doctoral/agenda.html"
+      }
     },
     {
       "key": "journals/braininf/LombardiFC26",
