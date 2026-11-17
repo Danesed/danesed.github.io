@@ -36,6 +36,20 @@
       "journals/corr/abs-2607-27974"
     ]
   ],
+  "overrides": {
+    "conf/miccai/DaneseLFAN26": {
+      "display_venue": "MICCAI",
+      "note": "Top 9% - Oral presentation",
+      "order": 8
+    },
+    "conf/miccai/DaneseLN26": {
+      "order": 10
+    },
+    "conf/miccai/Danese26ds": {
+      "display_venue": "MICCAI DS",
+      "order": 15
+    }
+  },
   "publications": [
     {
       "key": "conf/miccai/DaneseLN26",

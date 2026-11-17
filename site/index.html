@@ -177,6 +177,8 @@
   .pub[data-kind="journal"] .kind { background: var(--blue); color: var(--cream); }
   .pub[data-kind="conference"] .kind { background: var(--navy); color: var(--cream); }
   [data-theme="dark"] .pub[data-kind="conference"] .kind { background: var(--peri); color: var(--navy); }
+  .pub[data-kind] .kind.award { text-transform: none; letter-spacing: .01em; font-weight: 600; background: color-mix(in srgb, var(--coral) 16%, transparent); color: #B33219; }
+  [data-theme="dark"] .pub[data-kind] .kind.award { background: color-mix(in srgb, var(--coral) 22%, transparent); color: #FFB3A3; }
   .pub-title { font-size: clamp(1.12rem, 1.8vw, 1.32rem); line-height: 1.22; letter-spacing: -0.012em; }
   .pub-title a { text-decoration: none; }
   .pub-title a:hover { text-decoration: underline wavy 1px; text-underline-offset: 5px; text-decoration-color: var(--mark); }

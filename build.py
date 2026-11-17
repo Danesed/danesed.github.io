@@ -195,10 +195,13 @@ def works(records: list[dict], extra: dict) -> list[dict]:
         # Two datasets or two preprints of one paper: keep the first of each label.
         labels: set[str] = set()
         unique = [(label, url) for label, url in unique if not (label in labels or labels.add(label))]
-        result.append({**main, "links": unique, "bibtex": main.get("bibtex") or bibtex(main),
+        override: dict = {}
+        for version in reversed(versions):
+            override.update(extra.get("overrides", {}).get(version["key"], {}))
+        result.append({**main, **override, "links": unique, "bibtex": main.get("bibtex") or bibtex(main),
                        "figure": next((f for f in (figure(v["key"]) for v in versions) if f), None)})
 
-    result.sort(key=lambda w: (-(w["year"] or 0), RANK.index(w["kind"]), w["title"]))
+    result.sort(key=lambda w: (-(w["year"] or 0), w.get("order", RANK.index(w["kind"]) * 10), w["title"]))
     return result
 
 
@@ -249,9 +252,10 @@ def esc(text: str) -> str:
 
 
 def venue_line(w: dict) -> str:
-    parts = [w["venue"]] if w["venue"] else []
-    if w["kind"] == "journal" and w["volume"]:
-        parts[-1:] = [f"{w['venue']} {w['volume']}"]
+    venue = w.get("display_venue") or w["venue"]
+    parts = [venue] if venue else []
+    if w["kind"] == "journal" and w["volume"] and not w.get("display_venue"):
+        parts[-1:] = [f"{venue} {w['volume']}"]
     if w["year"]:
         parts.append(str(w["year"]))
     return " · ".join(parts)
@@ -282,10 +286,11 @@ def render(items: list[dict]) -> str:
                      f'<img src="{esc(w["figure"])}" alt="" loading="lazy" decoding="async"></button>')
         else:
             thumb = '<span class="thumb none" aria-hidden="true"><i class="wave"></i></span>'
+        note = f'<span class="kind award">{esc(w["note"])}</span>' if w.get("note") else ""
         out.append(
             f'<li class="pub" data-kind="{w["kind"]}" data-reveal>{thumb}'
             f'<div class="pub-body">'
-            f'<p class="pub-venue"><span class="kind">{KINDS[w["kind"]]}</span>{esc(venue_line(w))}</p>'
+            f'<p class="pub-venue"><span class="kind">{KINDS[w["kind"]]}</span>{esc(venue_line(w))}{note}</p>'
             f'<h4 class="pub-title">{title}</h4>'
             f'<p class="pub-authors">{authors}</p>'
             f'<div class="pub-links">{links}{bib}</div>'
