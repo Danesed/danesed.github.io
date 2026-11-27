@@ -269,15 +269,15 @@ def render(items: list[dict]) -> str:
             if out:
                 out.append("</ol></section>")
             year = w["year"]
-            out.append(f'<section class="year" aria-label="{year or "Undated"}">'
-                       f'<h3 class="year-mark" data-reveal>{year or "Undated"}</h3><ol class="pubs">')
+            out.append(f'<section class="year ruled" aria-label="{year or "Undated"}">'
+                       f'<h3 class="year-mark">{year or "Undated"}</h3><ol class="pubs">')
         authors = ", ".join(f"<b>{esc(a)}</b>" if a == AUTHOR else esc(a) for a in w["authors"])
         first = w["links"][0][1] if w["links"] else None
         title = f'<a href="{esc(first)}">{esc(w["title"])}</a>' if first else esc(w["title"])
-        links = "".join(f'<a class="pill small" href="{esc(url)}">{esc(label)}</a>' for label, url in w["links"])
+        links = "".join(f'<a class="tlink" href="{esc(url)}">{esc(label)}</a>' for label, url in w["links"])
         bib = ""
         if w["bibtex"]:
-            bib = ('<details class="bib"><summary class="pill small">BibTeX</summary>'
+            bib = ('<details class="bib"><summary class="tlink">BibTeX</summary>'
                    f'<div class="bib-box"><button class="pill small copy" type="button">Copy</button>'
                    f'<pre>{esc(w["bibtex"])}</pre></div></details>')
         if w.get("figure"):
@@ -288,7 +288,7 @@ def render(items: list[dict]) -> str:
             thumb = '<span class="thumb none" aria-hidden="true"><i class="wave"></i></span>'
         note = f'<span class="kind award">{esc(w["note"])}</span>' if w.get("note") else ""
         out.append(
-            f'<li class="pub" data-kind="{w["kind"]}" data-reveal>{thumb}'
+            f'<li class="pub" data-kind="{w["kind"]}">{thumb}'
             f'<div class="pub-body">'
             f'<p class="pub-venue"><span class="kind">{KINDS[w["kind"]]}</span>{esc(venue_line(w))}{note}</p>'
             f'<h4 class="pub-title">{title}</h4>'
