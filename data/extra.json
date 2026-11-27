@@ -99,6 +99,22 @@
       "published": 2026,
       "doi": "10.1186/s40708-026-00338-6",
       "url": "https://doi.org/10.1186/s40708-026-00338-6"
+    },
+    {
+      "key": "journals/corr/abs-2611-30578",
+      "kind": "preprint",
+      "title": "A Search Worth a Billion Pixels: Explaining Gigapixel Classifiers",
+      "authors": [
+        "Danilo Danese",
+        "Angela Lombardi",
+        "Tommaso Di Noia"
+      ],
+      "venue": "CoRR",
+      "volume": "abs/2611.30578",
+      "year": 2026,
+      "published": 2026,
+      "doi": "10.48550/ARXIV.2611.30578",
+      "url": "https://arxiv.org/abs/2611.30578"
     }
   ]
 }
